@@ -1,0 +1,65 @@
+.tree-indent-area {
+  width: 25px;
+  display: table-cell;
+  vertical-align: top;
+}
+
+.tree-indented {
+  display: table-cell;
+}
+
+.tree-clickable-area {
+  cursor: pointer;
+}
+
+.tree-clickable-area:hover {
+  background-color: lightgray;
+}
+
+.tree-node {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tree-button {
+  display: inline-block;
+  background: no-repeat left top;
+  vertical-align: middle;
+  padding: 4px;
+  cursor: pointer;
+  height: 100%;
+}
+
+.tree-highlighted {
+  background-color: rgba(150, 150, 150, 0.27);
+}
+
+.tree-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  min-height: 23px;
+}
+
+.tree-toolbar {
+  margin-bottom: 5px;
+}
+
+.tree-text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  width: inherit;
+}
+
+.tree-text-wrap {
+  white-space: normal;
+}
+
+.tree-label {
+  margin-right: 5px;
+}

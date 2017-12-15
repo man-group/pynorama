@@ -1,0 +1,60 @@
+.datatable {
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding-bottom: 1px;
+}
+
+.datatable th, .datatable td {
+  border: lightgray 1px solid;
+  padding: 3px;
+}
+
+.default-header-cell {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  cursor: pointer;
+
+  background-color: #e9e9e9;
+  padding: 3px;
+  border-width: 0;
+}
+
+.default-footer {
+  text-align: center;
+}
+
+.default-header-cell-text {
+  flex-grow: 1;
+}
+
+.datatable .datatable-hover-highlight:hover {
+  background-color: rgba(150, 150, 150, 0.27);
+}
+
+.datatable .datatable-clickable-cursor {
+  cursor: pointer;
+}
+
+.datatable .cell-stretch {
+  width: 100%;
+  height: 100%;
+}
+
+.datatable-transform-stack {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+
+  height: 100%;
+  width: 100%;
+}
+
+.transforms-space-below {
+  margin-bottom: 10px;
+}

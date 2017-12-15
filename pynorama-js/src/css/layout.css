@@ -1,0 +1,96 @@
+div,
+span {
+  font-size: 13px;
+}
+
+html,
+body,
+#main-div {
+  height: 100%;
+}
+
+body::-webkit-scrollbar,
+table::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  width: initial;
+  height: initial;
+}
+
+body::-webkit-scrollbar-track,
+table::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+body::-webkit-scrollbar-thumb,
+table::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border: white 5px solid;
+}
+
+
+.taskcolumn {
+  width: 35px;
+}
+
+.whitespacecolumn {
+  width: 100px;
+  padding-right: 100px;
+}
+
+.fixedcolumn {
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  width: inherit;
+  height: inherit;
+}
+
+.reload-spinning {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.turnaround {
+  width: 102vh;
+  transform: rotate(-90deg) translate(-50vh, -51vh);
+  transform-origin: top;
+}
+
+.panelheader {
+  background: linear-gradient(#5bc0de, #6bc0de);
+  font-weight: bold;
+  color: white;
+  padding: 5px;
+
+  margin-bottom: 3px;
+  box-shadow: 1px 1px 3px black;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 1500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 1300ms ease-in;
+}
+
+.header-nowrap {
+  white-space: nowrap;
+}

@@ -1,0 +1,5 @@
+include pynorama/templates/*.html
+recursive-include pynorama/static *.js
+include README.md
+include CHANGES.md
+include LICENSE

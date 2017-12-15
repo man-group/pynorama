@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pynorama - {{ view_name }}</title>
+  <script>
+    window.viewName = "{{ view_name }}";
+    window.options = {{ view_config|safe }};
+    window.initialState = {{ initial_state|safe }};
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register("{{ url_for('static', filename='/static/sw.js') }}")
+          .then(function(registration) {
+            console.log('SW registered: ', registration);
+          }).catch(function(registrationError) {
+            console.log('SW registration failed: ', registrationError);
+          }
+        );
+      });
+    }
+
+    (function() {
+      var check = document.createElement('script');
+      if (!('noModule' in check) && 'onbeforeload' in check) {
+        var support = false;
+        document.addEventListener('beforeload', function(e) {
+          if (e.target === check) {
+            support = true;
+          } else if (!e.target.hasAttribute('nomodule') || !support) {
+            return;
+          }
+          e.preventDefault();
+        }, true);
+
+        check.type = 'module';
+        check.src = '.';
+        document.head.appendChild(check);
+        check.remove();
+      }
+    }());
+  </script>
+</head>
+<body>
+<div id="main-div">
+  <!-- react elements go here -->
+</div>
+{% if webpack_dev_port %}
+<script src="http://{{ domain }}:{{ webpack_dev_port }}/vendor.bundle.js"></script>
+<script src="http://{{ domain }}:{{ webpack_dev_port }}/view.bundle.js"></script>
+{% else %}
+<script type=module src="{{ url_for('static', filename='vendor.bundle.js') }}"></script>
+<script type=module src="{{ url_for('static', filename='view.bundle.js') }}"></script>
+<script nomodule src="{{ url_for('static', filename='view.legacy.bundle.js') }}"></script>
+{% endif %}
+</body>
+</html>

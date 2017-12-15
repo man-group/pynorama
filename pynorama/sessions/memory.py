@@ -1,0 +1,13 @@
+from .base_store import SessionStore
+
+
+class InMemorySessionStore(SessionStore):
+    """Primitive sessions store that only uses a transient application memory."""
+    def __init__(self):
+        super(InMemorySessionStore, self).__init__()
+
+    def load_sessions(self, view_name):
+        return {}
+
+    def save_sessions(self, view_name, sessions):
+        pass

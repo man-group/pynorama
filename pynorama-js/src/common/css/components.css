@@ -1,0 +1,100 @@
+.closeableheader-container {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+}
+
+.closeableheader-content {
+  width: 100%;
+  overflow: hidden;
+}
+
+.closeableheader-buttons {
+  flex-shrink: 0;
+}
+
+.closeableheader-button {
+  cursor: pointer;
+  margin: 3px;
+}
+
+.hresizer-container {
+  height: 100%;
+  display: flex;
+
+  vertical-align: top;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+.hresizer-content {
+  width: auto;
+  height: 100%;
+}
+
+.hresizer-splitter {
+  width: 3px;
+  height: 100%;
+  cursor: col-resize;
+  background: lightgray;
+}
+
+.hresizer-splitter:hover {
+  background: gray;
+}
+
+.hpanel-container {
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+.hpanel-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.hpanel-header {
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.hstack {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+.hstack-item {
+
+}
+
+.vertical-scroll-area {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.vertical-scroll-area > * {
+  height: auto;
+}

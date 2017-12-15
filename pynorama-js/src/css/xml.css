@@ -1,0 +1,24 @@
+.tagName {
+  color: rgb(200, 0, 133);
+}
+
+.tag {
+  white-space: nowrap;
+}
+
+.attribute {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.attributeName {
+  color: rgb(200, 30, 30);
+}
+
+.attributeEquals {
+  color: rgb(20, 20, 20);
+}
+
+.attributeValue {
+  color: rgb(50, 30, 150);
+}
