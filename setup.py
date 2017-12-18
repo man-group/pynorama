@@ -26,9 +26,10 @@ setup(
     ],
     extras_require={
         'docs': [
+            'pypandoc',
             'sphinx',
-            "nbsphinx",
-            "sphinxcontrib-napoleon"
+            'nbsphinx',
+            'sphinxcontrib-napoleon'
         ],
         'mongo': [
             'pymongo'
