@@ -1,4 +1,9 @@
 machine:
+  pre: 
+    - sudo apt-get update 
+    - wget https://github.com/jgm/pandoc/releases/download/2.0.5/pandoc-2.0.5-1-amd64.deb
+    - sudo dpkg -i pandoc-2.0.5-1-amd64.deb
+
   environment:
     COVERALLS_REPO_TOKEN: TODO
 
@@ -8,4 +13,5 @@ dependencies:
 
 test:
   post:
+    - 
     - python setup.py build_sphinx
