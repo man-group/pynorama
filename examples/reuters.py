@@ -7,6 +7,7 @@ from pynorama.table import PandasTable
 from pynorama.logging import logger
 from pynorama.exceptions import RecordNotFound
 
+
 class ReutersView(View):
     """
     Example demonstrating visualization of a set of news data.
@@ -21,12 +22,12 @@ class ReutersView(View):
     def load(self):
         logger.info('Starting processing reuters dataset.')
         self.df = pd.DataFrame([{
-            'id': id,
-            'abspath': str(reuters.abspath(id)),
-            'categories': [c+' ' for c in reuters.categories(id)],
-            'headline': reuters.raw(id).split('\n', 1)[0],
-            'length': len(reuters.raw(id))
-        } for id in reuters.fileids()])
+            'doc_id': doc_id,
+            'abspath': str(reuters.abspath(doc_id)),
+            'categories': [c + ' ' for c in reuters.categories(doc_id)],
+            'headline': reuters.raw(doc_id).split('\n', 1)[0],
+            'length': len(reuters.raw(doc_id))
+        } for doc_id in reuters.fileids()])
         logger.info('Finishing processing reuters dataset.')
 
     def get_table(self):
@@ -34,7 +35,7 @@ class ReutersView(View):
 
     def get_pipeline(self):
         return {
-            'raw': { 'viewer': 'raw'},
+            'raw': {'viewer': 'raw'},
             'doctree': {'parents': ['raw'],
                         'viewer': 'doctree'}
         }
@@ -45,10 +46,9 @@ class ReutersView(View):
             return rawdoc
         if stage == 'doctree':
             return [word_tokenize(sent) for sent in sent_tokenize(rawdoc)]
-        raise RecordNotFound(key, stage);
-
+        raise RecordNotFound(key, stage)
 
     def get_config(self):
-        return make_config('id',
-            available_transforms=["nans", "search", "quantile_range"],
-            initial_visible_columns=["id"])
+        return make_config('doc_id',
+                           available_transforms=['nans', 'search', 'quantile_range'],
+                           initial_visible_columns=['doc_id'])

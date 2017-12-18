@@ -1,8 +1,7 @@
 class SessionStore(object):
     """Basic functions for storing the sessions of all views.
 
-    Sessions are defined per view and store the state of the front-end user interface,
-        
+    Sessions are defined per view and store the state of the front-end user interface.
 
     To define a new storage format, inherit SessionStore and implement
     save_sessions and load_sessions.

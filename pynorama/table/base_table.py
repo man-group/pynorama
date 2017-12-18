@@ -8,7 +8,7 @@ class Table(object):
                             final, but not part of the transform pipeline, e.g.
                             data to plot a histogram at a certain step in the pipeline.
     """
-    def __init__(self, transform_mapping, side_result = None):
+    def __init__(self, transform_mapping, side_result=None):
         self.transform_mapping = transform_mapping
         self.side_result = side_result
 

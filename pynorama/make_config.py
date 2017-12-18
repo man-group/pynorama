@@ -1,7 +1,6 @@
-def make_config(key,
-                show_index=True,
-                available_transforms=[],
-                initial_visible_columns=[]):
+
+
+def make_config(key, show_index=True, available_transforms=[], initial_visible_columns=[]):
     """Utility function for creating front-end configurations.
 
     For some frequently used parameters, it creates the nested tree structure

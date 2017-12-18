@@ -1,5 +1,4 @@
-from flask import Flask, request, render_template, Response, \
-    send_from_directory, redirect, url_for
+from flask import (Flask, request, render_template, Response)
 
 from json import dumps
 import os
@@ -7,6 +6,7 @@ import os
 from view import get_view
 from sessions import InMemorySessionStore
 from exceptions import JSONRequestBodyRequired, ViewNotFound, RecordNotFound
+
 
 def show_pynorama_view(view_name):
     """Return the desired pynorama view by rendering an HTML template.
@@ -132,6 +132,7 @@ def get_sessions(view_name):
     sessions = _session_store.get_sessions(view.get_name())
     return dumps(sessions.keys())
 
+
 def add_session(view_name):
     """Adds another session to the session store.
 
@@ -197,7 +198,8 @@ def handle_json_request_body_required(error):
 
 _session_store = None
 
-def make_server(session_store = InMemorySessionStore()):
+
+def make_server(session_store=InMemorySessionStore()):
     """ Creates the Flask app that powers the Pynorama backend.
 
         Args:

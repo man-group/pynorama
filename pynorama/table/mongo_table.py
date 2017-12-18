@@ -25,7 +25,7 @@ class MongoTable(Table):
 
     # TODO: index field
     def __init__(self, collection, transforms=()):
-        super(MongoTable, self).__init__(TRANSFORMS_MAPPING)
+        super(MongoTable, self).__init__(MongoTable.TRANSFORMS_MAPPING)
         self.collection = collection
         self.transforms = transforms
 
@@ -38,7 +38,7 @@ class MongoTable(Table):
     def __len__(self):
         # filter out sorts / projections, which will just slow down count
         transforms = [transform for transform in self.transforms
-            if not ('$sort' in transform or '$project' in transform)]
+                      if not ('$sort' in transform or '$project' in transform)]
 
         if transforms:
             transforms.append({'$group': {'_id': None, 'count': {'$sum': 1}}})
@@ -59,7 +59,6 @@ class MongoTable(Table):
             df = pd.DataFrame([self.collection.find_one({})]).drop('_id', axis=1)
             df = df.drop(df.index)
         return df
-
 
     def apply_bounds(self, offset, length):
         return self.mongo_transform({'$skip': offset}, {'$limit': length})

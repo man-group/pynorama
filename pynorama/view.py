@@ -1,14 +1,19 @@
 from exceptions import ViewNotFound
+
+
 views = {}
+
 
 def register_views(*args):
     views.update({view.get_name(): view for view in args})
     for view in args:
         view.load()
 
+
 def register_view(view):
     views[view.get_name()] = view
     view.load()
+
 
 def get_view(name):
     if name not in views:
