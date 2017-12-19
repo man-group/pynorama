@@ -43,7 +43,8 @@ setup(
     ],
     tests_require=[
         'mock',
-        'pytest'
+        'pytest',
+        'pytest-shutil'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
