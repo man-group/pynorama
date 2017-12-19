@@ -44,6 +44,7 @@ setup(
     tests_require=[
         'mock',
         'pytest',
+        'pytest-cov',
         'pytest-shutil',
         'pytest-mongodb'
     ],
