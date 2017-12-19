@@ -10,6 +10,7 @@ class MongoSessionStore(SessionStore):
     Args:
         collection: a pymongo collection.
     """
+
     def __init__(self, collection):
         super(MongoSessionStore, self).__init__()
         self.collection = collection
@@ -18,8 +19,8 @@ class MongoSessionStore(SessionStore):
         record = self.collection.find_one({'view_name': view_name})
         return record.get('sessions', {})
 
-    def set_sessions(self, view_name, sessions):
+    def save_sessions(self, view_name, sessions):
         self.collection.update_one(
             {'view_name': view_name},
-            {'view_name': view_name, 'sessions': sessions},
-            {'upsert': True})
+            {'$set': {'view_name': view_name, 'sessions': sessions}},
+            upsert=True)

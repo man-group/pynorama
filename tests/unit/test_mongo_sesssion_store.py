@@ -1,8 +1,7 @@
 from pynorama.sessions import MongoSessionStore
 from datetime import datetime
-from pymongo import MongoClient
 from pytest_mongodb.plugin import mongodb
-
+from mongomock.mongo_client import MongoClient
 
 def test_load_sessions(mongodb):
     assert 'sessions' in mongodb.collection_names()
@@ -11,8 +10,9 @@ def test_load_sessions(mongodb):
                sesstion_data) == 0
 
 def test_save_sessions():
-    collection = mongomock.MongoClient().db.collection
-    MongoSessionStore(collection).save_sessions('test', {
+    collection = MongoClient().db.collection
+    store = MongoSessionStore(collection)
+    store.save_sessions('test', {
         "foo": "bar",
         "xyz": 1,
         "someday": "2017-12-19T13:18:44.745Z"
