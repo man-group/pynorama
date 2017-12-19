@@ -13,5 +13,6 @@ dependencies:
 
 test:
   post:
-    - 
     - python setup.py build_sphinx
+    - cp result.xml $CIRCLE_TEST_REPORTS
+    - cp coverage.xml $CIRCLE_TEST_REPORTS
