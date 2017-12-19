@@ -43,7 +43,10 @@ setup(
     ],
     tests_require=[
         'mock',
-        'pytest'
+        'pytest',
+        'pytest-cov',
+        'pytest-shutil',
+        'pytest-mongodb'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
