@@ -12,6 +12,9 @@ dependencies:
     - pip install -e .[docs]
 
 test:
+  override:
+    - python setup.py test
+
   post:
     - python setup.py build_sphinx
     - cp result.xml $CIRCLE_TEST_REPORTS
