@@ -41,6 +41,7 @@ setup(
     setup_requires=[
         'pytest-runner'
     ],
+    test_suite='tests',
     tests_require=[
         'mock',
         'pytest',
