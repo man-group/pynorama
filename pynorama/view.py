@@ -21,6 +21,10 @@ def get_view(name):
     return views[name]
 
 
+def list_views():
+    return [view for _, view in views.iteritems()]
+
+
 class View(object):
     """Inherit this class to define the data and config of a new pynorama view."""
     def __init__(self, name, description=''):
@@ -48,3 +52,6 @@ class View(object):
 
     def get_name(self):
         return self.name
+
+    def get_metadata(self):
+        return {}

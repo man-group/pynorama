@@ -1,11 +1,25 @@
+import os
+import re
+from exceptions import JSONRequestBodyRequired, ViewNotFound, RecordNotFound
+from json import dumps
+
 from flask import (Flask, request, render_template, Response)
 
-from json import dumps
-import os
-
-from view import get_view
 from sessions import InMemorySessionStore
-from exceptions import JSONRequestBodyRequired, ViewNotFound, RecordNotFound
+from view import get_view, list_views
+
+
+def find_views():
+    query = request.args.get('query', '.*')
+    pattern = re.compile(query)
+    return dumps(
+        [{'name': view.get_name(),
+          'description': view.get_description(),
+          'metadata': view.get_metadata()
+          }
+         for view in list_views()
+         if pattern.match(view.get_name())]
+    )
 
 
 def show_pynorama_view(view_name):
@@ -120,7 +134,7 @@ def reload_view(view_name):
 
     Triggered by a POST request sent when the user clicks on the Reload button.
     """
-    #TODO, in debug reload the resource
+    # TODO, in debug reload the resource
     view = get_view(view_name)
     view.load()
     return '', 200
@@ -137,7 +151,8 @@ def add_session(view_name):
     """Adds another session to the session store.
 
     The session is given as JSON containing a name and
-    a string containing the string representing the JSON-serialized state of the front-end.
+    a string containing the string representing the JSON-serialized state of
+    the front-end.
     """
     if not request.is_json:
         raise JSONRequestBodyRequired()
@@ -173,7 +188,8 @@ def remove_session(view_name):
 
 
 def get_state(view_name):
-    """Returns the string representing the state of the front-end for a given session."""
+    """Returns the string representing the state of the front-end for
+    a given session."""
     view = get_view(view_name)
 
     session_name = request.args['session']
@@ -183,7 +199,8 @@ def get_state(view_name):
 
 def handle_record_not_found(error):
     """Response to when the view was not found."""
-    return '''Record for key '%s' and stage '%s' not found''' % (error.key, error.stage), 400
+    return '''Record for key '%s' and stage '%s' not found''' % (
+    error.key, error.stage), 400
 
 
 def handle_view_not_found(error):
@@ -204,8 +221,9 @@ def make_server(session_store=InMemorySessionStore()):
 
         Args:
             session_store: subclass of pynorama.sessions.SessionStore,
-                           defaults to InMemorySessionStore, for which sessions are lost if the
-                           server is shut down. Provide another store for permanent storage.
+                           defaults to InMemorySessionStore, for which sessions
+                           are lost if the server is shut down. Provide
+                           another store for permanent storage.
     """
 
     global _session_store
@@ -216,7 +234,8 @@ def make_server(session_store=InMemorySessionStore()):
 
     app.register_error_handler(RecordNotFound, handle_record_not_found)
     app.register_error_handler(ViewNotFound, handle_view_not_found)
-    app.register_error_handler(JSONRequestBodyRequired, handle_json_request_body_required)
+    app.register_error_handler(JSONRequestBodyRequired,
+                               handle_json_request_body_required)
 
     base_string = '/view/<string:view_name>/'
     GET_rules = {
@@ -234,8 +253,16 @@ def make_server(session_store=InMemorySessionStore()):
     }
 
     for key, value in GET_rules.iteritems():
-        app.add_url_rule(base_string + key, key or 'main', value, methods=['GET'])
+        app.add_url_rule(base_string + key,
+                         key or 'main',
+                         value,
+                         methods=['GET'])
     for key, value in POST_rules.iteritems():
-        app.add_url_rule(base_string + key, key or 'main', value, methods=['POST'])
+        app.add_url_rule(base_string + key,
+                         key or 'main',
+                         value,
+                         methods=['POST'])
+
+    app.add_url_rule('/views/', 'index', find_views, methods=['GET'])
 
     return app
