@@ -10,7 +10,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register("{{ url_for('static', filename='/static/sw.js') }}")
+        navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
           .then(function(registration) {
             console.log('SW registered: ', registration);
           }).catch(function(registrationError) {
