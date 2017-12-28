@@ -2,7 +2,7 @@ from .base_store import SessionStore
 
 
 class InMemorySessionStore(SessionStore):
-    """Primitive sessions store that only uses a transient application memory."""
+    """Primitive session store that only uses transient application memory."""
     def __init__(self):
         super(InMemorySessionStore, self).__init__()
 
