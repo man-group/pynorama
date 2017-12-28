@@ -1,9 +1,10 @@
 import React from "react";
 import MessageFormat from "messageformat";
 import moment from "moment";
+import sanitizeHtml from "sanitize-html";
 
 const FORMATTERS = {
-  upcase: v => v.toUpperCase(),
+  upcase: (v) => v.toUpperCase(),
   locale: (v, lc) => lc,
   prop: (v, lc, p) => v[p],
   relative: (v, lc, now = []) => {
@@ -11,12 +12,24 @@ const FORMATTERS = {
     let time = moment(v);
     return time.from(timeNow);
   },
-  timedelta: v => {
+  timedelta: (v) => {
     let timeNow = moment(0);
     let time = moment(v);
     return time.from(timeNow, true);
   },
-  decimal: (v, lc, precision) => v.toFixed(precision)
+  decimal: (v, lc, precision) => v.toFixed(precision),
+  replace: (v, lc, [pattern, replacement, flags = ""]) => {
+    const strip = /^"(.*(?="$))"$/;
+    if (v) {
+      return v.replace(
+          new RegExp(
+              pattern.replace(strip, '$1'),
+              flags.replace(strip, '$1')
+          ),
+          replacement.replace(strip, '$1'));
+    }
+    return v;
+  }
 };
 
 import { isDateTime, isNumber } from "../../dtypes";
@@ -24,12 +37,7 @@ import { isDateTime, isNumber } from "../../dtypes";
 const format = (value, style, message, formatters = {}) => {
   let mf = new MessageFormat("en-GB").setIntlSupport(true);
   mf.addFormatters(formatters);
-  let format = mf.compile(message);
-  return (
-    <div className="cell-stretch" style={style}>
-      <span>{format({ value })}</span>
-    </div>
-  );
+  return mf.compile(message)({value});
 };
 
 export default function TemplatedCell({ column, dtype, value, options }) {
@@ -45,5 +53,26 @@ export default function TemplatedCell({ column, dtype, value, options }) {
   }
 
   let message = options.message ? options.message : "{value}";
-  return format(value, style, message, FORMATTERS);
+  let formattedValue = format(value, style, message, FORMATTERS);
+  if (options.html) {
+    formattedValue = sanitizeHtml(formattedValue, {
+      allowedAttributes: Object.assign(
+          {},
+          sanitizeHtml.defaults.allowedAttributes,
+          {a: ["href", "rel", "target", "name"]}
+      )
+    });
+
+    return (
+        <div className="cell-stretch"
+             style={style}
+             dangerouslySetInnerHTML={{ __html: formattedValue }}>
+        </div>
+    );
+  }
+  return (
+      <div className="cell-stretch" style={style}>
+        <span>{formattedValue}</span>
+      </div>
+  );
 }
