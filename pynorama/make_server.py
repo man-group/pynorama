@@ -308,7 +308,7 @@ def make_server(session_store=InMemorySessionStore()):
                          methods=['POST'])
 
     app.add_url_rule('/', 'index', show_views, methods=['GET'])
-    app.add_url_rule('/reload/', 'reload_all', reload_all_views(), methods=['POST'])
+    app.add_url_rule('/reload/', 'reload_all', reload_all_views, methods=['POST'])
     app.add_url_rule('/views/', 'list', find_views, methods=['GET'])
 
     return app
