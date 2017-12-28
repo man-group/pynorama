@@ -4,8 +4,11 @@ import re
 from datetime import datetime, date
 from pynorama.exceptions import (JSONRequestBodyRequired, ViewNotFound,
                                  RecordNotFound)
+try:
+    from bson import ObjectId
+except ImportError:
+    ObjectId = None
 
-from bson import ObjectId
 from flask import (Flask, request, render_template, Response, redirect, url_for)
 
 from sessions import InMemorySessionStore
