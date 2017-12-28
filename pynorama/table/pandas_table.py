@@ -122,6 +122,9 @@ def histogram_transform(pandas_table, transform):
         counts = series.value_counts()
         cut = counts.iloc[0:bins]
         cut['Other'] = counts[bins:].sum()
+        # FIXME: Workaround for https://github.com/pandas-dev/pandas/issues/18678
+        if np.isnan(cut['Other']):
+            cut['Other'] = 0
         x = cut.index.tolist()
         y = cut.values.tolist()
         # FIXME: Is this the right width for categorical variables? Perhaps a list of 1-s?
