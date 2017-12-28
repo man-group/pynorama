@@ -70,9 +70,17 @@ def sort_transform(pandas_table, transform):
     """
     dataframe = pandas_table.dataframe
     if transform['column'] == 'index':
-        return PandasTable(dataframe.sort_index(ascending=transform['ascending']))
-    return PandasTable(dataframe.sort(transform['column'],
-                       ascending=transform['ascending']))
+        return PandasTable(
+            dataframe.sort_index(ascending=transform['ascending']))
+    elif hasattr(dataframe, 'sort_values'):
+        return PandasTable(
+            dataframe.sort_values(transform['column'],
+                                  ascending=transform['ascending']))
+    else:
+        return PandasTable(
+            dataframe.sort(transform['column'],
+                           ascending=transform['ascending']))
+
 
 
 def quantile_range_transform(pandas_table, transform):
