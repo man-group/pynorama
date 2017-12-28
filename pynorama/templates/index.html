@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pynorama</title>
+</head>
+<body>
+<ul>
+    {% for name, view in views %}
+    <li><a href="/view/{{ name }}/">{{ view.get_description() }}</a></li>
+    {% endfor %}
+</ul>
+<div>
+    <form method="post" action="/reload">
+        <button type="submit" value="Reload datasets">Refresh views</button>
+    </form>
+</div>
+</body>
+</html>

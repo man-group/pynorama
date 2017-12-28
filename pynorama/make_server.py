@@ -1,15 +1,49 @@
+import json
 import os
 import re
-from exceptions import JSONRequestBodyRequired, ViewNotFound, RecordNotFound
-from json import dumps
+from datetime import datetime, date
+from pynorama.exceptions import (JSONRequestBodyRequired, ViewNotFound,
+                                 RecordNotFound)
 
-from flask import (Flask, request, render_template, Response)
+from bson import ObjectId
+from flask import (Flask, request, render_template, Response, redirect, url_for)
 
 from sessions import InMemorySessionStore
 from view import get_view, list_views
 
 
+class JSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        if isinstance(obj, date):
+            return obj.isoformat()
+        if ObjectId and isinstance(obj, ObjectId):
+            return str(obj)
+        return super(JSONEncoder, self).default(obj)
+
+
+def dumps(data, **kwargs):
+    return JSONEncoder(**kwargs).encode(data)
+
+
+def show_views():
+    """Simple views index"""
+    webpack_dev_port = request.args.get('webpack_dev_port')
+    return render_template(
+        'index.html',
+        webpack_dev_port=webpack_dev_port,
+        domain=request.host.split(':')[0],
+        views=list_views()
+    )
+
+
 def find_views():
+    """JSON endpoint returning view name to view metadata mapping
+
+    Allows filtering of view name by regular expression supplied as a 'query'
+    parameter.
+    """
     query = request.args.get('query', '.*')
     pattern = re.compile(query)
     return dumps(
@@ -140,6 +174,16 @@ def reload_view(view_name):
     return '', 200
 
 
+def reload_all_views():
+    """Reloads all views
+
+    Triggered by POST request sent when the user clicks on Reload views button
+    """
+    for view in list_views():
+        view.load()
+    return redirect(url_for('.index'))
+
+
 def get_sessions(view_name):
     """Returns a JSON-serialized list of names of all stored sessions."""
     view = get_view(view_name)
@@ -263,6 +307,8 @@ def make_server(session_store=InMemorySessionStore()):
                          value,
                          methods=['POST'])
 
-    app.add_url_rule('/views/', 'index', find_views, methods=['GET'])
+    app.add_url_rule('/', 'index', show_views, methods=['GET'])
+    app.add_url_rule('/reload/', 'reload_all', reload_all_views(), methods=['POST'])
+    app.add_url_rule('/views/', 'list', find_views, methods=['GET'])
 
     return app
