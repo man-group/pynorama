@@ -1,8 +1,9 @@
+from collections import OrderedDict
 from .exceptions import ViewNotFound
 from .logging import logger
 
 
-views = {}
+views = OrderedDict()
 
 
 def register_views(*args):
