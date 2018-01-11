@@ -12,7 +12,7 @@ except (IOError, ImportError, OSError):
 
 setup(
     name='pynorama',
-    version='0.4.1',
+    version='0.4.2',
     author="Man AHL Technology",
     author_email="ManAHLTech@ahl.com",
     description='Natural Language Processing Visualization Tool',
