@@ -6,10 +6,11 @@ from pynorama.exceptions import (JSONRequestBodyRequired, ViewNotFound,
                                  RecordNotFound)
 
 from bson import ObjectId
-from flask import (Flask, request, render_template, Response, redirect, url_for)
+from flask import Flask, request, render_template, Response, redirect, url_for, flash
 
-from sessions import InMemorySessionStore
-from view import get_view, list_views
+from .sessions import InMemorySessionStore
+from .view import get_view, list_views
+from .logging import logger
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -175,12 +176,16 @@ def reload_view(view_name):
 
 
 def reload_all_views():
-    """Reloads all views
+    """Reload all views.
 
     Triggered by POST request sent when the user clicks on Reload views button
     """
     for view in list_views():
-        view.load()
+        try:
+            view.load()
+        except Exception as e:
+            logger.error(e)
+            flash('Error loading {}: {}'.format(view.get_name(), str(e)))
     return redirect(url_for('.index'))
 
 

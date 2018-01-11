@@ -1,4 +1,5 @@
-from exceptions import ViewNotFound
+from .exceptions import ViewNotFound
+from .logging import logger
 
 
 views = {}
@@ -12,7 +13,10 @@ def register_views(*args):
 
 def register_view(view):
     views[view.get_name()] = view
-    view.load()
+    try:
+        view.load()
+    except Exception as e:
+        logger.error('Error loading {}: {}'.format(view.get_name(), e))
 
 
 def get_view(name):
