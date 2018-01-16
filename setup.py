@@ -22,7 +22,8 @@ setup(
     install_requires=[
         'flask',
         'numpy',
-        'pandas'
+        'pandas',
+        'bson'
     ],
     extras_require={
         'docs': [
