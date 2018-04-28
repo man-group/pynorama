@@ -12,6 +12,7 @@ import {
   compose
 } from "redux";
 import { connect as reduxConnect } from "react-redux";
+import _ from "lodash";
 
 /*
   global objects that maps action types to reducer functions

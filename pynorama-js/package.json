@@ -5,10 +5,12 @@
   "license": "LGPL-2.1",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "classnames": "^2.2.5",
+    "dom-helpers": "^3.3.1",
     "lodash": "^4.17.4",
     "messageformat": "^1.1.0",
     "pdfobject": "^2.0.201604172",
-    "rc-slider": "^8.3.0",
+    "rc-slider": "^8.6.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
@@ -17,13 +19,17 @@
     "react-redux": "^5.0.5",
     "react-resize-aware": "^2.5.0",
     "react-select": "^1.0.0-rc.5",
-    "redux": "^3.7.1",
+    "redux": "^3.7.2",
     "sanitize-html": "^1.15.0",
-    "url-search-params": "^0.9.0"
+    "url-search-params": "^0.9.0",
+    "uuid": "^3.2.1",
+    "vis": "^4.21.0",
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^8.0.1",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-es2015-parameters": "^6.24.1",
@@ -37,6 +43,8 @@
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
     "css-loader": "^0.28.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-google": "^0.9.1",
@@ -49,9 +57,11 @@
     "eslint-plugin-react": "^7.3.0",
     "file-loader": "^0.11.2",
     "flow": "^0.2.3",
+    "jest": "^22.4.3",
     "name-all-modules-plugin": "^1.0.1",
     "prettier": "^1.6.1",
     "prettier-eslint": "^8.2.1",
+    "react-test-renderer": "^15.6.1",
     "style-loader": "^0.18.2",
     "uglify-es": "^3.2.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
@@ -70,6 +80,23 @@
     "flow start": "flow start",
     "flow stop": "flow stop",
     "flow status": "flow status",
-    "flow coverage": "flow coverage"
+    "flow coverage": "flow coverage",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "testMatch": [
+      "**/test/**/*_test.js?(x)"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+
   }
 }
