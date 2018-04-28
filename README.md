@@ -1,11 +1,11 @@
 ## Pynorama
 Pynorama is a tool for visualizing intricate datasets for which a simple table format is not suitable. It was created with Natural Language Processing applications in mind.
 
-[TODO: Screenshot]
+![pynorama example screenshot](pynorama.png)
 
-Pynorama lets you define *views* in **python** that are rendered as interactive web applications, letting you browse, analyse and understand your data.
+Pynorama lets you define *views* in **Python** that are rendered as interactive web applications, letting you browse, analyse and understand your data.
 
-Pynorama is **open and extensible.**
+Pynorama is **scalable and extensible.**
 Pynorama has a clean and simple architecture.
 It makes little assumptions about your data source or data format.
 Read in the [documentation](https://pynorama.readthedocs.io) about developing extensions.
@@ -22,12 +22,12 @@ pip install pynorama
 ### Using Pynorama
 
 To create a *view*:
- * define a table describing your data records, currently supported sources are pandas dataframe and mongo queries.
+ * define a table describing your data records. Currently supported sources are pandas.DataFrame and MongoDB queries.
  * define different stages of your data pipeline.
  * return a particular records for a given stage.
  * configure the UI
 
-In python this would look similar to this:
+In Python this would look similar to this:
 ```python
 from pynorama import View
 from pynorama.table import PandasTable
@@ -60,7 +60,7 @@ from pynorama import register_view
 register_view(ExampleView('example'))
 ```
 
-Finally, let Pynorama set up a *flask* server for you and start it:
+Finally, let Pynorama set up a *Flask* server for you and start it:
 ```python
 from pynorama import make_server
 
@@ -68,7 +68,7 @@ app = make_server()
 app.run(host='localhost', port='5000')
 ```
 
-Now just run your python script! The view should be accessible at *http://localhost:5000/view/example*.
+Now just run your Python script! The view should be accessible at *http://localhost:5000/view/example*.
 
 For more information check the [examples](examples) and the [documentation](https://pynorama.readthedocs.io)!
 
