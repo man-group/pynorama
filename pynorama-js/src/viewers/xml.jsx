@@ -37,7 +37,7 @@ class CollapsedNodePresenter extends React.Component {
   }
 }
 
-class LeafNodePresenter extends React.Component {
+export class LeafNodePresenter extends React.Component {
   render() {
     if (this.props.node.nodeType == Node.ELEMENT_NODE) {
       return (
@@ -50,7 +50,7 @@ class LeafNodePresenter extends React.Component {
     }
   }
 }
-class TagFrontPresenter extends React.Component {
+export class TagFrontPresenter extends React.Component {
   render() {
     let attributes = [];
     for (let attr of this.props.node.attributes) {
@@ -66,7 +66,7 @@ class TagFrontPresenter extends React.Component {
   }
 }
 
-class AttributePresenter extends React.Component {
+export class AttributePresenter extends React.Component {
   render() {
     return (
       <span className={"attribute"}>
@@ -90,7 +90,7 @@ class TagEndPresenter extends React.Component {
   }
 }
 
-function getChildren(node) {
+export function getChildren(node) {
   if (node.nodeType == Node.ELEMENT_NODE) {
     let children = [];
     for (let child of node.childNodes) {
