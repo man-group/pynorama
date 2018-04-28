@@ -1,7 +1,7 @@
 ## Pynorama
 Pynorama is a tool for visualizing intricate datasets for which a simple table format is not suitable. It was created with Natural Language Processing applications in mind.
 
-[TODO: Screenshot]
+![pynorama example screenshot](pynorama.png)
 
 Pynorama lets you define *views* in **python** that are rendered as interactive web applications, letting you browse, analyse and understand your data.
 
