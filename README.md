@@ -8,7 +8,7 @@ Pynorama lets you define *views* in **Python** that are rendered as interactive 
 Pynorama is **scalable and extensible.**
 Pynorama has a clean and simple architecture.
 It makes little assumptions about your data source or data format.
-Read in the [documentation](https://pynorama.readthedocs.io) about developing extensions.
+Read in the [documentation](https://github.com/manahl/pynorama/blob/master/docs/source/walkthrough.ipynb) about developing extensions.
 
 ## Quickstart
 
@@ -70,7 +70,7 @@ app.run(host='localhost', port='5000')
 
 Now just run your Python script! The view should be accessible at *http://localhost:5000/view/example*.
 
-For more information check the [examples](examples) and the [documentation](https://pynorama.readthedocs.io)!
+For more information check the [examples](examples) and the [documentation](https://github.com/manahl/pynorama/blob/master/docs/source/walkthrough.ipynb)!
 
 ## Acknowledgements
 
