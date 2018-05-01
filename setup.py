@@ -20,6 +20,7 @@ setup(
     keywords=['ahl', 'visualization', 'NLP', 'data discovery'],
     url='https://github.com/manahl/pynorama',
     install_requires=[
+        'bson',
         'flask',
         'numpy',
         'pandas',
