@@ -22,7 +22,8 @@ setup(
     install_requires=[
         'flask',
         'numpy',
-        'pandas'
+        'pandas',
+        'six'
     ],
     extras_require={
         'docs': [
@@ -56,6 +57,7 @@ setup(
         'Topic :: Scientific/Engineering :: Visualization',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7'
+        'Programming Language :: Python :: 3.5'
     ],
     packages=find_packages(
         where='.',

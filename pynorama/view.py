@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from .exceptions import ViewNotFound
 from .logging import logger
+from six import iteritems
 
 
 views = OrderedDict()
@@ -27,7 +28,7 @@ def get_view(name):
 
 
 def list_views():
-    return [view for _, view in views.iteritems()]
+    return [view for _, view in iteritems(views)]
 
 
 class View(object):

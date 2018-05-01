@@ -2,6 +2,7 @@ import json
 import os
 import re
 from datetime import datetime, date
+from six import iteritems
 from pynorama.exceptions import (JSONRequestBodyRequired, ViewNotFound,
                                  RecordNotFound)
 
@@ -193,7 +194,7 @@ def get_sessions(view_name):
     """Returns a JSON-serialized list of names of all stored sessions."""
     view = get_view(view_name)
     sessions = _session_store.get_sessions(view.get_name())
-    return dumps(sessions.keys())
+    return dumps(list(sessions.keys()))
 
 
 def add_session(view_name):
@@ -301,12 +302,12 @@ def make_server(session_store=InMemorySessionStore()):
         'remove_session': remove_session,
     }
 
-    for key, value in GET_rules.iteritems():
+    for key, value in iteritems(GET_rules):
         app.add_url_rule(base_string + key,
                          key or 'main',
                          value,
                          methods=['GET'])
-    for key, value in POST_rules.iteritems():
+    for key, value in iteritems(POST_rules):
         app.add_url_rule(base_string + key,
                          key or 'main',
                          value,
