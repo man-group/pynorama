@@ -35,7 +35,8 @@ setup(
             'pymongo'
         ],
         'examples': [
-            'nltk'
+            'nltk',
+            'spacy'
         ]
     },
     setup_requires=[
