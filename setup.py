@@ -47,7 +47,8 @@ setup(
         'pytest',
         'pytest-cov',
         'pytest-shutil',
-        'pytest-mongodb'
+        'pytest-mongodb',
+        'numexpr'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
