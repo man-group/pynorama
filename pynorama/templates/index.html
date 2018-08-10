@@ -7,7 +7,7 @@
 <body>
 <ul>
     {% for view in views %}
-    <li><a href="/view/{{ view.get_name() }}/">{{ view.get_description() }}</a></li>
+    <li><a href="{{ url_for('main', view_name=view.get_name()) }}">{{ view.get_description() }}</a></li>
     {% endfor %}
 </ul>
 <div>
