@@ -2,6 +2,7 @@ import re
 import numpy as np
 import pandas as pd
 import fnmatch
+import six
 
 from .base_table import Table
 
@@ -154,7 +155,7 @@ def _found(element, searchterm):
     """Return True if a given cell matches the search term, False otherwise"""
     if element is None:
         return False
-    if isinstance(element, basestring):
+    if isinstance(element, six.string_types):
         return fnmatch.fnmatch(element.strip().lower(), searchterm.strip().lower())
     if isinstance(element, (float, int)):
         # FIXME: This doesn't play nicely with Pandas datetypes

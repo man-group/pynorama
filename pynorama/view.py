@@ -27,7 +27,7 @@ def get_view(name):
 
 
 def list_views():
-    return [view for _, view in views.iteritems()]
+    return [view for _, view in views.items()]
 
 
 class View(object):
