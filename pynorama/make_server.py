@@ -301,12 +301,12 @@ def make_server(session_store=InMemorySessionStore()):
         'remove_session': remove_session,
     }
 
-    for key, value in GET_rules.iteritems():
+    for key, value in GET_rules.items():
         app.add_url_rule(base_string + key,
                          key or 'main',
                          value,
                          methods=['GET'])
-    for key, value in POST_rules.iteritems():
+    for key, value in POST_rules.items():
         app.add_url_rule(base_string + key,
                          key or 'main',
                          value,
