@@ -193,7 +193,7 @@ def get_sessions(view_name):
     """Returns a JSON-serialized list of names of all stored sessions."""
     view = get_view(view_name)
     sessions = _session_store.get_sessions(view.get_name())
-    return dumps(sessions.keys())
+    return dumps(list(sessions.keys()))
 
 
 def add_session(view_name):
