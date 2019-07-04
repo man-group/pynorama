@@ -68,7 +68,10 @@ def test_histogram_transform_categorical():
                             'y': [2, 2, 0],
                             'width': None}
     assert original.equals(transformed.to_pandas())
-    assert expected_side_result == transformed.side_result
+    assert expected_side_result.keys() == transformed.side_result.keys()
+    assert expected_side_result['width'] == transformed.side_result['width']
+    assert set(expected_side_result['x']) == set(transformed.side_result['x'])  # 't1', 't2' may be flipped
+    assert expected_side_result['y'] == transformed.side_result['y']
 
 
 def test_nans_transform_hide():
